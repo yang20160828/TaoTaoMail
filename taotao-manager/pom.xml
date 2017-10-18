@@ -10,8 +10,8 @@
 
     <artifactId>taotao-manager</artifactId>
     <packaging>pom</packaging>
-
     <name>taotao-manager</name>
+    <version>0.0.1-SNAPSHOT</version>
     <url>http://maven.apache.org</url>
     <modules>
         <module>taotao-manager-pojo</module>
