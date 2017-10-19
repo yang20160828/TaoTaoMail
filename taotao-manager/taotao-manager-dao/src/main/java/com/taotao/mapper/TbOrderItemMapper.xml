@@ -70,9 +70,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, item_id, order_id, num, title, price, total_fee, pic_path
+    <if test="fields == null" >
+      id, item_id, order_id, num, title, price, total_fee, pic_path
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbOrderItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbOrderItemQuery" >
     select
     <if test="distinct" >
       distinct
@@ -85,10 +90,13 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
+    id,item_id,order_id,num,title,price,total_fee,pic_path
     from tb_order_item
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -96,7 +104,7 @@
     delete from tb_order_item
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbOrderItemExample" >
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbOrderItemQuery" >
     delete from tb_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -165,7 +173,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.taotao.pojo.TbOrderItemExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.taotao.pojo.TbOrderItemQuery" resultType="java.lang.Integer" >
     select count(*) from tb_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

@@ -1,14 +1,14 @@
 package com.taotao.mapper;
 
 import com.taotao.pojo.TbContent;
-import com.taotao.pojo.TbContentExample;
+import com.taotao.pojo.TbContentQuery;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TbContentMapper {
-    int countByExample(TbContentExample example);
+    int countByExample(TbContentQuery example);
 
-    int deleteByExample(TbContentExample example);
+    int deleteByExample(TbContentQuery example);
 
     int deleteByPrimaryKey(Long id);
 
@@ -16,17 +16,17 @@ public interface TbContentMapper {
 
     int insertSelective(TbContent record);
 
-    List<TbContent> selectByExampleWithBLOBs(TbContentExample example);
+    List<TbContent> selectByExampleWithBLOBs(TbContentQuery example);
 
-    List<TbContent> selectByExample(TbContentExample example);
+    List<TbContent> selectByExample(TbContentQuery example);
 
     TbContent selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") TbContent record, @Param("example") TbContentExample example);
+    int updateByExampleSelective(@Param("record") TbContent record, @Param("example") TbContentQuery example);
 
-    int updateByExampleWithBLOBs(@Param("record") TbContent record, @Param("example") TbContentExample example);
+    int updateByExampleWithBLOBs(@Param("record") TbContent record, @Param("example") TbContentQuery example);
 
-    int updateByExample(@Param("record") TbContent record, @Param("example") TbContentExample example);
+    int updateByExample(@Param("record") TbContent record, @Param("example") TbContentQuery example);
 
     int updateByPrimaryKeySelective(TbContent record);
 

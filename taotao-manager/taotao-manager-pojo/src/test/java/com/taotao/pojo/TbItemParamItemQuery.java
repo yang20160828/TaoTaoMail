@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbItemDescExample {
+public class TbItemParamItemQuery {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbItemDescExample() {
+    protected Integer pageNo = 1;
+
+    protected Integer startRow;
+
+    protected Integer pageSize = 10;
+
+    protected String fields;
+
+    public TbItemParamItemQuery() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -64,6 +72,40 @@ public class TbItemDescExample {
         distinct = false;
     }
 
+    public void setPageNo(Integer pageNo) {
+        this.pageNo=pageNo;
+        this.startRow = (pageNo-1)*this.pageSize;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setStartRow(Integer startRow) {
+        this.startRow=startRow;
+    }
+
+    public Integer getStartRow() {
+        return startRow;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize=pageSize;
+        this.startRow = (pageNo-1)*this.pageSize;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setFields(String fields) {
+        this.fields=fields;
+    }
+
+    public String getFields() {
+        return fields;
+    }
+
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -103,6 +145,66 @@ public class TbItemDescExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdEqualTo(Long value) {
+            addCriterion("id =", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotEqualTo(Long value) {
+            addCriterion("id <>", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThan(Long value) {
+            addCriterion("id >", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("id >=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThan(Long value) {
+            addCriterion("id <", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdLessThanOrEqualTo(Long value) {
+            addCriterion("id <=", value, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdIn(List<Long> values) {
+            addCriterion("id in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotIn(List<Long> values) {
+            addCriterion("id not in", values, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdBetween(Long value1, Long value2) {
+            addCriterion("id between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNotBetween(Long value1, Long value2) {
+            addCriterion("id not between", value1, value2, "id");
+            return (Criteria) this;
         }
 
         public Criteria andItemIdIsNull() {

@@ -73,10 +73,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, receiver_name, receiver_phone, receiver_mobile, receiver_state, receiver_city, 
-    receiver_district, receiver_address, receiver_zip, created, updated
+    <if test="fields == null" >
+      order_id, receiver_name, receiver_phone, receiver_mobile, receiver_state, receiver_city, 
+      receiver_district, receiver_address, receiver_zip, created, updated
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbOrderShippingExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbOrderShippingQuery" >
     select
     <if test="distinct" >
       distinct
@@ -89,10 +94,13 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    <include refid="Base_Column_List" />
+    order_id,receiver_name,receiver_phone,receiver_mobile,receiver_state,receiver_city,receiver_district,receiver_address,receiver_zip,created,updated
     from tb_order_shipping
     where order_id = #{orderId,jdbcType=VARCHAR}
   </select>
@@ -100,7 +108,7 @@
     delete from tb_order_shipping
     where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbOrderShippingExample" >
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbOrderShippingQuery" >
     delete from tb_order_shipping
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -189,7 +197,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.taotao.pojo.TbOrderShippingExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.taotao.pojo.TbOrderShippingQuery" resultType="java.lang.Integer" >
     select count(*) from tb_order_shipping
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

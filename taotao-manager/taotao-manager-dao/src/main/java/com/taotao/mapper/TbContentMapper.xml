@@ -75,12 +75,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, category_id, title, sub_title, title_desc, url, pic, pic2, created, updated
+    <if test="fields == null" >
+      id, category_id, title, sub_title, title_desc, url, pic, pic2, created, updated
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
   </sql>
   <sql id="Blob_Column_List" >
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.taotao.pojo.TbContentExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.taotao.pojo.TbContentQuery" >
     select
     <if test="distinct" >
       distinct
@@ -96,7 +101,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbContentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbContentQuery" >
     select
     <if test="distinct" >
       distinct
@@ -109,10 +114,13 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+    id,category_id,title,sub_title,title_desc,url,pic,pic2,created,updated,content
     ,
     <include refid="Blob_Column_List" />
     from tb_content
@@ -122,7 +130,7 @@
     delete from tb_content
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbContentExample" >
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbContentQuery" >
     delete from tb_content
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -211,7 +219,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.taotao.pojo.TbContentExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.taotao.pojo.TbContentQuery" resultType="java.lang.Integer" >
     select count(*) from tb_content
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

@@ -1,14 +1,14 @@
 package com.taotao.mapper;
 
 import com.taotao.pojo.TbUser;
-import com.taotao.pojo.TbUserExample;
+import com.taotao.pojo.TbUserQuery;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TbUserMapper {
-    int countByExample(TbUserExample example);
+    int countByExample(TbUserQuery example);
 
-    int deleteByExample(TbUserExample example);
+    int deleteByExample(TbUserQuery example);
 
     int deleteByPrimaryKey(Long id);
 
@@ -16,13 +16,13 @@ public interface TbUserMapper {
 
     int insertSelective(TbUser record);
 
-    List<TbUser> selectByExample(TbUserExample example);
+    List<TbUser> selectByExample(TbUserQuery example);
 
     TbUser selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") TbUser record, @Param("example") TbUserExample example);
+    int updateByExampleSelective(@Param("record") TbUser record, @Param("example") TbUserQuery example);
 
-    int updateByExample(@Param("record") TbUser record, @Param("example") TbUserExample example);
+    int updateByExample(@Param("record") TbUser record, @Param("example") TbUserQuery example);
 
     int updateByPrimaryKeySelective(TbUser record);
 

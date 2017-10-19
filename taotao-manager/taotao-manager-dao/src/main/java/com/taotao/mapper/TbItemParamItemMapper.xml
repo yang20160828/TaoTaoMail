@@ -69,12 +69,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, item_id, created, updated
+    <if test="fields == null" >
+      id, item_id, created, updated
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
   </sql>
   <sql id="Blob_Column_List" >
     param_data
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.taotao.pojo.TbItemParamItemExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.taotao.pojo.TbItemParamItemQuery" >
     select
     <if test="distinct" >
       distinct
@@ -90,7 +95,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbItemParamItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbItemParamItemQuery" >
     select
     <if test="distinct" >
       distinct
@@ -103,10 +108,13 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+    id,item_id,created,updated,param_data
     ,
     <include refid="Blob_Column_List" />
     from tb_item_param_item
@@ -116,7 +124,7 @@
     delete from tb_item_param_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbItemParamItemExample" >
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbItemParamItemQuery" >
     delete from tb_item_param_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -165,7 +173,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.taotao.pojo.TbItemParamItemExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.taotao.pojo.TbItemParamItemQuery" resultType="java.lang.Integer" >
     select count(*) from tb_item_param_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

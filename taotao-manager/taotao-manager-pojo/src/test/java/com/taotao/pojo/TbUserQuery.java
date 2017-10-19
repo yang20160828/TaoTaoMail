@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbUserExample {
+public class TbUserQuery {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbUserExample() {
+    protected Integer pageNo = 1;
+
+    protected Integer startRow;
+
+    protected Integer pageSize = 10;
+
+    protected String fields;
+
+    public TbUserQuery() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -62,6 +70,40 @@ public class TbUserExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo=pageNo;
+        this.startRow = (pageNo-1)*this.pageSize;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setStartRow(Integer startRow) {
+        this.startRow=startRow;
+    }
+
+    public Integer getStartRow() {
+        return startRow;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize=pageSize;
+        this.startRow = (pageNo-1)*this.pageSize;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setFields(String fields) {
+        this.fields=fields;
+    }
+
+    public String getFields() {
+        return fields;
     }
 
     protected abstract static class GeneratedCriteria {

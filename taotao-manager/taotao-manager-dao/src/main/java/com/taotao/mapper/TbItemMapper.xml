@@ -73,9 +73,14 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, sell_point, price, num, barcode, image, cid, status, created, updated
+    <if test="fields == null" >
+      id, title, sell_point, price, num, barcode, image, cid, status, created, updated
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.taotao.pojo.TbItemQuery" >
     select
     <if test="distinct" >
       distinct
@@ -88,10 +93,13 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+    id,title,sell_point,price,num,barcode,image,cid,status,created,updated
     from tb_item
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -99,7 +107,7 @@
     delete from tb_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbItemExample" >
+  <delete id="deleteByExample" parameterType="com.taotao.pojo.TbItemQuery" >
     delete from tb_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -188,7 +196,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.taotao.pojo.TbItemExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.taotao.pojo.TbItemQuery" resultType="java.lang.Integer" >
     select count(*) from tb_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

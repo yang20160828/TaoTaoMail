@@ -1,14 +1,14 @@
 package com.taotao.mapper;
 
 import com.taotao.pojo.TbOrder;
-import com.taotao.pojo.TbOrderExample;
+import com.taotao.pojo.TbOrderQuery;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TbOrderMapper {
-    int countByExample(TbOrderExample example);
+    int countByExample(TbOrderQuery example);
 
-    int deleteByExample(TbOrderExample example);
+    int deleteByExample(TbOrderQuery example);
 
     int deleteByPrimaryKey(String orderId);
 
@@ -16,13 +16,13 @@ public interface TbOrderMapper {
 
     int insertSelective(TbOrder record);
 
-    List<TbOrder> selectByExample(TbOrderExample example);
+    List<TbOrder> selectByExample(TbOrderQuery example);
 
     TbOrder selectByPrimaryKey(String orderId);
 
-    int updateByExampleSelective(@Param("record") TbOrder record, @Param("example") TbOrderExample example);
+    int updateByExampleSelective(@Param("record") TbOrder record, @Param("example") TbOrderQuery example);
 
-    int updateByExample(@Param("record") TbOrder record, @Param("example") TbOrderExample example);
+    int updateByExample(@Param("record") TbOrder record, @Param("example") TbOrderQuery example);
 
     int updateByPrimaryKeySelective(TbOrder record);
 
